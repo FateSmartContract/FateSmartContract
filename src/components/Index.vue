@@ -7,9 +7,9 @@
                 (註：目前區塊鏈是使用 Ethereum Rinkeby Testnet)
             </p>
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg mt-1" href="#" role="button"><i class="fas fa-play"></i> Play</a>
-            <a class="btn btn-info btn-lg mt-1" href="#" role="button"><i class="far fa-question-circle"></i> Q & A</a>
-            <a class="btn btn-info btn-lg mt-1" href="#" role="button"><i class="fas fa-cubes"></i> How it works</a>
+            <router-link class="btn btn-primary btn-lg mt-1" to="/"><i class="fas fa-play"></i> Play</router-link>
+            <router-link class="btn btn-info btn-lg mt-1" to="/"><i class="far fa-question-circle"></i> Q & A</router-link>
+            <router-link class="btn btn-info btn-lg mt-1" to="/how-it-works"><i class="fas fa-cubes"></i> How it works</router-link>
         </div>
         <p>備註：</p>
         <ul>
