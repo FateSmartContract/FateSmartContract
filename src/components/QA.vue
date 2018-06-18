@@ -1,13 +1,12 @@
 <template>
     <div class="container">
         <router-link to="/" class="title"><h1>Fate/Smart Contract</h1></router-link>
-        <h1>How it Works</h1>
-        <!-- TODO: -->
+        <h1>Q & A</h1>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'HowItWorks'
+        name: 'QA'
     }
 </script>

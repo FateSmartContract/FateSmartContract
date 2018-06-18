@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
+import QA from '@/components/QA'
 import HowItWorks from '@/components/HowItWorks'
 import Dashboard from '@/components/Dashboard'
 
@@ -12,6 +13,11 @@ export default new Router({
             path: '/',
             name: 'index',
             component: Index
+        },
+        {
+            path: '/q-and-a',
+            name: 'q-and-a',
+            component: QA
         },
         {
             path: '/how-it-works',

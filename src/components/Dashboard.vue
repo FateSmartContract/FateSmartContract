@@ -15,14 +15,6 @@
 </script>
 
 <style scoped>
-    .title {
-        color: black;
-    }
-
-    .title:hover {
-        text-decoration: none;
-    }
-
     .btn-outline-display {
         cursor: default !important;
     }

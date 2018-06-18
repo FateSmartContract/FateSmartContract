@@ -9,3 +9,14 @@
         name: 'app'
     }
 </script>
+
+<style>
+    .title {
+        color: black;
+    }
+
+    .title:hover {
+        color: black;
+        text-decoration: none;
+    }
+</style>
