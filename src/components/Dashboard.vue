@@ -2,9 +2,10 @@
     <div class="container">
         <router-link to="/" class="title"><h1>Fate/Smart Contract</h1></router-link>
         <span class="btn btn-outline-dark btn-lg float-right btn-outline-display"><i class="fas fa-cube"></i> 30</span>
-        <router-link class="btn btn-outline-dark btn-lg mt-1" to="#"><i class="fas fa-dice"></i> 召喚</router-link>
-        <router-link class="btn btn-outline-dark btn-lg mt-1" to="#"><i class="fas fa-store"></i> 商店</router-link>
-        <router-link class="btn btn-outline-dark btn-lg mt-1" to="#"><i class="fas fa-history"></i> 召喚紀錄</router-link>
+        <router-link class="btn btn-outline-dark btn-lg" to="/dashboard/summon"><i class="fas fa-dice"></i> 召喚</router-link>
+        <router-link class="btn btn-outline-dark btn-lg" to="/dashboard/store"><i class="fas fa-store"></i> 商店</router-link>
+        <router-link class="btn btn-outline-dark btn-lg" to="/dashboard/summon-history"><i class="fas fa-history"></i> 召喚紀錄</router-link>
+        <router-view class="mt-1"></router-view>
     </div>
 </template>
 

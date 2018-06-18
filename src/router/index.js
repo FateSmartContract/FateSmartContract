@@ -4,6 +4,9 @@ import Index from '@/components/Index'
 import QA from '@/components/QA'
 import HowItWorks from '@/components/HowItWorks'
 import Dashboard from '@/components/Dashboard'
+import Summon from '@/components/Summon'
+import Store from '@/components/Store'
+import SummonHistory from '@/components/SummonHistory'
 
 Vue.use(Router)
 
@@ -27,7 +30,24 @@ export default new Router({
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: Dashboard
+            component: Dashboard,
+            children: [
+                {
+                    path: 'summon',
+                    name: 'summon',
+                    component: Summon
+                },
+                {
+                    path: 'store',
+                    name: 'store',
+                    component: Store
+                },
+                {
+                    path: 'summon-history',
+                    name: 'summon-history',
+                    component: SummonHistory
+                }
+            ]
         }
     ]
 })
