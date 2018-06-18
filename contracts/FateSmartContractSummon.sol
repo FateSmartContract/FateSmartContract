@@ -16,6 +16,16 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
         summon(10);
     }
 
+    function summon(uint256 amount) internal notPause {
+        require(amount > 0);
+        require(players[msg.sender].tokenQuartzAmount >= amount * 3);
+        players[msg.sender].tokenQuartzAmount -= amount * 3;
+
+
+        emit SummonEvent(msg.sender, amount);
+        // + hash ?
+    }
+
     function _summonCallback(address playerAddress, uint256[] results, uint256[] cardType) external onlyCreator {
         require(results.length == cardType.length);
 
@@ -28,15 +38,5 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
         }
 
         // event (hash ?)
-    }
-
-    function summon(uint256 amount) internal notPause {
-        require(amount > 0);
-        require(players[msg.sender].tokenQuartzAmount >= amount * 3);
-        players[msg.sender].tokenQuartzAmount -= amount * 3;
-
-
-        emit SummonEvent(msg.sender, amount);
-        // + hash ?
     }
 }

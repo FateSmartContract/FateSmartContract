@@ -1,7 +1,6 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title">商店</h2>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
