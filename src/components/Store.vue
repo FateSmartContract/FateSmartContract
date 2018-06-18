@@ -9,7 +9,7 @@
                             <div class="media">
                                 <i class="mr-3 align-self-center fas fa-cube" style="font-size: 5em;"></i>
                                 <div class="media-body">
-                                    <h5 class="card-title">未知的方塊 167 個</h5>
+                                    <h5 class="card-title">方塊 167 個</h5>
                                     <p class="m-0">1 Ether</p>
                                     <span class="btn btn-primary float-right" @click="buyTokenQuartz()">購買</span>
                                 </div>
