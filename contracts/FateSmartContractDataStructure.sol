@@ -14,9 +14,9 @@ contract FateSmartContractDataStructure is FateSmartContractAccessControl {
 
     mapping(address => Player) public players;
 
-//    function getTokenQuartzAmount() public view returns (uint256) {
-//        return players[msg.sender].tokenQuartzAmount;
-//    }
+    function getTokenQuartzAmount(address playerAddress) public view returns (uint256) {
+        return players[playerAddress].tokenQuartzAmount;
+    }
 
     function addTokenQuartzAmount(address playerAddress, uint256 amount) public onlyCreator notPause {
         players[playerAddress].tokenQuartzAmount += amount;

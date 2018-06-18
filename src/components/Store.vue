@@ -11,7 +11,7 @@
                                 <div class="media-body">
                                     <h5 class="card-title">未知的方塊 167 個</h5>
                                     <p class="m-0">1 Ether</p>
-                                    <a href="javascript:void(0);" class="btn btn-primary float-right">購買</a>
+                                    <span class="btn btn-primary float-right" @click="buyTokenQuartz()">購買</span>
                                 </div>
                             </div>
                         </div>
@@ -23,7 +23,14 @@
 </template>
 
 <script>
+    import player from '@/js/player'
+
     export default {
-        name: 'Store'
+        name: 'Store',
+        methods: {
+            buyTokenQuartz: function () {
+                player.buyTokenQuartz()
+            }
+        }
     }
 </script>

@@ -7,6 +7,9 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+let eventHub = new Vue()
+Vue.prototype.$eventHub = eventHub
+
 window.addEventListener('load', function () {
     if (typeof web3 !== 'undefined') {
         console.log('Web3 injected browser: OK.')
@@ -24,5 +27,16 @@ window.addEventListener('load', function () {
         template: '<App/>',
         components: {App}
     })
+
+    if (typeof window.web3 !== 'undefined') {
+        const filter = window.web3.eth.filter('latest')
+        filter.watch((err, res) => {
+            if (err) {
+                console.log(`Watch error: ${err}`)
+            } else {
+                eventHub.$emit('web3js-latest')
+            }
+        })
+    }
 })
 
