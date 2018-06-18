@@ -22,6 +22,10 @@ contract FateSmartContractAccessControl {
         pause = false;
     }
 
+    function getCreator() public view returns (address) {
+        return creator;
+    }
+
     function setPause(bool _pause) public onlyCreator {
         pause = _pause;
     }
