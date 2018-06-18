@@ -7,7 +7,7 @@
                 (註：目前區塊鏈是使用 Ethereum Rinkeby Testnet)
             </p>
             <hr class="my-4">
-            <router-link class="btn btn-primary btn-lg mt-1" to="/"><i class="fas fa-play"></i> Play</router-link>
+            <router-link class="btn btn-primary btn-lg mt-1" to="/dashboard"><i class="fas fa-play"></i> Play</router-link>
             <router-link class="btn btn-info btn-lg mt-1" to="/"><i class="far fa-question-circle"></i> Q & A</router-link>
             <router-link class="btn btn-info btn-lg mt-1" to="/how-it-works"><i class="fas fa-cubes"></i> How it works</router-link>
         </div>
@@ -25,8 +25,3 @@
         name: 'index'
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
