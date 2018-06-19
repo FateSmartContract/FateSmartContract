@@ -44,17 +44,18 @@
 <style scoped>
     .btn-outline-display {
         cursor: default !important;
+        border-color: transparent;
     }
 
     .btn-outline-display:hover {
         color: #343a40;
         background-color: transparent;
-        border-color: #343a40;
+        border-color: transparent;
     }
 
     .btn-outline-display:active {
         color: #343a40 !important;
         background-color: transparent !important;
-        border-color: #343a40 !important;
+        border-color: transparent !important;
     }
 </style>
