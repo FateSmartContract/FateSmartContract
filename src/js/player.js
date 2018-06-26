@@ -53,6 +53,34 @@ const Player = {
                 reject(err)
             })
         })
+    },
+
+    summonOne: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.summonOne(
+                {from: window.web3.eth.accounts[0]}
+            ).then(tx => {
+                resolve(tx)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    summonTen: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.summonTen(
+                {from: window.web3.eth.accounts[0]}
+            ).then(tx => {
+                resolve(tx)
+            }).catch(err => {
+                reject(err)
+            })
+        })
     }
 }
 

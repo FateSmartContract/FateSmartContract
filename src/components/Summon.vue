@@ -6,14 +6,14 @@
                     </div>
                     <div class="text-center">
                         <div style="display: inline-block">
-                            <button type="button" class="btn btn-primary btn-lg">
+                            <button type="button" class="btn btn-primary btn-lg" @click="summonOne()">
                                 召喚 1 回
                             </button>
                             <br/>
                             <span><i class="fas fa-cube"></i> 消耗 方塊 * 3</span>
                         </div>
                         <div style="display: inline-block; margin-left: 10vw">
-                            <button type="button" class="btn btn-primary btn-lg">
+                            <button type="button" class="btn btn-primary btn-lg" @click="summonTen()">
                                 召喚 10 回
                             </button>
                             <br/>
@@ -25,8 +25,18 @@
 </template>
 
 <script>
+    import player from '@/js/player'
+
     export default {
-        name: 'Summon'
+        name: 'Summon',
+        methods: {
+            summonOne: function () {
+                player.summonOne()
+            },
+            summonTen: function () {
+                player.summonTen()
+            }
+        }
     }
 </script>
 
