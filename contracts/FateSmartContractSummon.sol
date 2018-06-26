@@ -6,7 +6,10 @@ import "./FateSmartContractDataStructure.sol";
 
 contract FateSmartContractSummon is FateSmartContractDataStructure {
 
-    event SummonEvent(address playerId, uint256 _amount);
+    mapping (uint256 => uint256) public responses;
+
+    event SummonEvent(uint256 hash, address playerId, uint256 amount);
+    event SummonedEvent(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType);
 
     function summonOne() public {
         summon(1);
@@ -16,17 +19,21 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
         summon(10);
     }
 
-    function summon(uint256 amount) internal notPause {
+    function summon(uint256 amount) internal notPause returns (uint256) {
         require(amount > 0);
         require(players[msg.sender].tokenQuartzAmount >= amount * 3);
         players[msg.sender].tokenQuartzAmount -= amount * 3;
 
+        uint256 hash = uint256(keccak256(abi.encodePacked(block.number, now, amount, msg.sender)));
 
-        emit SummonEvent(msg.sender, amount);
-        // + hash ?
+        responses[hash] = 1;
+        emit SummonEvent(hash, msg.sender, amount);
+
+        return hash;
     }
 
-    function _summonCallback(address playerAddress, uint256[] results, uint256[] cardType) external onlyCreator {
+    function summonCallback(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType) external onlyCreator {
+        require(responses[hash] == 1);
         require(results.length == cardType.length);
 
         for (uint256 i = 0; i < results.length; i++) {
@@ -37,6 +44,7 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
             }
         }
 
-        // event (hash ?)
+        responses[hash] = 2;
+        emit SummonedEvent(hash, playerAddress, results, cardType);
     }
 }
