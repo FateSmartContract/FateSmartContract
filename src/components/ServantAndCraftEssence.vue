@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        name: 'ServantAndCraftEssence',
+        name: 'ServantAndCraftEssence'
     }
 </script>
 
