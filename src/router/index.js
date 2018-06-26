@@ -32,6 +32,7 @@ export default new Router({
         },
         {
             path: '/dashboard',
+            redirect: 'dashboard/servant-and-craft-essence',
             name: 'dashboard',
             component: Dashboard,
             children: [
