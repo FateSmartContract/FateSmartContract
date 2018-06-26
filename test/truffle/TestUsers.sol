@@ -6,7 +6,7 @@ import "../../contracts/Users.sol";
 
 contract TestUsers {
 
-  function testUser() {
-  }
+    function testUser() {
+    }
 
 }
