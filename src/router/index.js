@@ -7,7 +7,9 @@ import Dashboard from '@/components/Dashboard'
 import Summon from '@/components/Summon'
 import Store from '@/components/Store'
 import SummonHistory from '@/components/SummonHistory'
-import ServantAndCraftEssence from '@/components/ServantAndCraftEssence'
+import ServantAndCraftEssence from '@/components/ServantAndCraftEssence/index'
+import ServantList from '@/components/ServantAndCraftEssence/ServantList'
+import CraftEssenceList from '@/components/ServantAndCraftEssence/CraftEssenceList'
 
 Vue.use(Router)
 
@@ -35,8 +37,21 @@ export default new Router({
             children: [
                 {
                     path: 'servant-and-craft-essence',
+                    redirect: 'servant-and-craft-essence/servant',
                     name: 'servant-and-craft-essence',
-                    component: ServantAndCraftEssence
+                    component: ServantAndCraftEssence,
+                    children: [
+                        {
+                            path: 'servant',
+                            name: 'servant',
+                            component: ServantList
+                        },
+                        {
+                            path: 'craft-essence',
+                            name: 'craft-essence',
+                            component: CraftEssenceList
+                        }
+                    ]
                 },
                 {
                     path: 'summon',
