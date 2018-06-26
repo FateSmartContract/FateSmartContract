@@ -1,4 +1,4 @@
-# Fate Smart Contract
+# [WIP] Fate Smart Contract
 
 ```
 truffle.cmd compile
