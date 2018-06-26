@@ -8,7 +8,7 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
 
     mapping (uint256 => uint256) public responses;
 
-    event SummonEvent(uint256 hash, address playerId, uint256 amount);
+    event SummonEvent(uint256 hash, address playerAddress, uint256 amount);
     event SummonedEvent(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType);
 
     function summonOne() public {
@@ -33,6 +33,7 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
     }
 
     function summonCallback(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType) external onlyCreator {
+        // FIXME: amount check ?
         require(responses[hash] == 1);
         require(results.length == cardType.length);
 
