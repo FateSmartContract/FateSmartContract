@@ -38,6 +38,36 @@ const Player = {
         })
     },
 
+    getServant: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.getServant.call(
+                window.web3.eth.accounts[0],
+                {from: window.web3.eth.accounts[0]}
+            ).then(tx => {
+                resolve(tx)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    getCraftEssence: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.getCraftEssence.call(
+                window.web3.eth.accounts[0],
+                {from: window.web3.eth.accounts[0]}
+            ).then(tx => {
+                resolve(tx)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
     buyTokenQuartz: function () {
         let self = this
 
