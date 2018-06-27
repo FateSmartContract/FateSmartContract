@@ -8,8 +8,6 @@ import router from './router'
 
 import player from '@/js/player'
 
-Vue.config.productionTip = false
-
 window.addEventListener('load', function () {
     if (typeof web3 !== 'undefined') {
         console.log('Web3 injected browser: OK.')
