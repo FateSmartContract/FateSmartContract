@@ -1,5 +1,5 @@
 <template>
-    <div class="card summon-card" style="height: calc(100vh - 124px - 2rem)">
+    <div class="card summon-card">
         <div class="card-body">
             <div style="height: 60vh">
                 <h1 class="text-center display-1 summon-title">卡池 001</h1>
