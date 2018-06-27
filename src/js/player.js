@@ -45,8 +45,8 @@ const Player = {
             self.instance.getServant.call(
                 window.web3.eth.accounts[0],
                 {from: window.web3.eth.accounts[0]}
-            ).then(tx => {
-                resolve(tx)
+            ).then(result => {
+                resolve(result.map(n => n.toNumber()))
             }).catch(err => {
                 reject(err)
             })
@@ -60,8 +60,8 @@ const Player = {
             self.instance.getCraftEssence.call(
                 window.web3.eth.accounts[0],
                 {from: window.web3.eth.accounts[0]}
-            ).then(tx => {
-                resolve(tx)
+            ).then(result => {
+                resolve(result.map(n => n.toNumber()))
             }).catch(err => {
                 reject(err)
             })
