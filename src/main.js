@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
     Vue.use(Vuex)
     const store = new Vuex.Store({
         state: {
-            tokenQuartzAmount: undefined
+            tokenQuartzAmount: null
         },
         getters: {
             tokenQuartzAmount: state => state.tokenQuartzAmount
