@@ -1,14 +1,14 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App'
 import Web3 from 'web3'
 import router from './router'
 
-Vue.config.productionTip = false
+import player from '@/js/player'
 
-let eventHub = new Vue()
-Vue.prototype.$eventHub = eventHub
+Vue.config.productionTip = false
 
 window.addEventListener('load', function () {
     if (typeof web3 !== 'undefined') {
@@ -20,21 +20,48 @@ window.addEventListener('load', function () {
         window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
     }
 
+    Vue.use(Vuex)
+    const store = new Vuex.Store({
+        state: {
+            tokenQuartzAmount: undefined
+        },
+        getters: {
+            tokenQuartzAmount: state => state.tokenQuartzAmount
+        },
+        mutations: {
+            updateTokenQuartzAmount (state, amount) {
+                state.tokenQuartzAmount = amount
+            }
+        },
+        actions: {
+            web3UpdateTokenQuartzAmount ({commit, state}) {
+                player.getTokenQuartzAmount().then(result => {
+                    commit('updateTokenQuartzAmount', result.toNumber())
+                })
+            }
+        }
+    })
+
     /* eslint-disable no-new */
     new Vue({
         el: '#app',
         router,
+        store,
         template: '<App/>',
         components: {App}
     })
 
     if (typeof window.web3 !== 'undefined') {
+        player.init().then(function () {
+            store.dispatch('web3UpdateTokenQuartzAmount')
+        })
+
         const filter = window.web3.eth.filter('latest')
         filter.watch((err, res) => {
             if (err) {
                 console.log(`Watch error: ${err}`)
             } else {
-                eventHub.$emit('web3js-latest')
+                store.dispatch('web3UpdateTokenQuartzAmount')
             }
         })
     }

@@ -23,32 +23,14 @@
 </template>
 
 <script>
-    import player from '@/js/player'
+    import {mapGetters} from 'vuex'
 
     export default {
         name: 'Dashboard',
-        created: function () {
-            player.init()
-                .then(this.updateTokenQuartzAmount)
-                .catch(err => {
-                    console.log(err)
-                })
-
-            this.$eventHub.$on('web3js-latest', ($event) => {
-                this.updateTokenQuartzAmount()
-            })
-        },
-        data: function () {
-            return {
-                tokenQuartzAmount: 0
-            }
-        },
-        methods: {
-            updateTokenQuartzAmount: function () {
-                player.getTokenQuartzAmount().then(result => {
-                    this.tokenQuartzAmount = result.toNumber()
-                })
-            }
+        computed: {
+            ...mapGetters([
+                'tokenQuartzAmount'
+            ])
         }
     }
 </script>
