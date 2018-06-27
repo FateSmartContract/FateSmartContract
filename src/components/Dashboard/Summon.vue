@@ -42,7 +42,7 @@
 
 <style>
     .summon-card {
-        background: url('../assets/summon-background.jpg') no-repeat center center;
+        background: url('../../assets/summon-background.jpg') no-repeat center center;
         background-size: cover;
     }
 

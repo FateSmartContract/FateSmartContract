@@ -3,13 +3,15 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import QA from '@/components/QA'
 import HowItWorks from '@/components/HowItWorks'
-import Dashboard from '@/components/Dashboard'
-import Summon from '@/components/Summon'
-import Store from '@/components/Store'
-import SummonHistory from '@/components/SummonHistory'
-import ServantAndCraftEssence from '@/components/ServantAndCraftEssence/index'
-import ServantList from '@/components/ServantAndCraftEssence/ServantList'
-import CraftEssenceList from '@/components/ServantAndCraftEssence/CraftEssenceList'
+
+import Dashboard from '@/components/Dashboard/Index'
+import Summon from '@/components/Dashboard/Summon'
+import Store from '@/components/Dashboard/Store'
+import SummonHistory from '@/components/Dashboard/SummonHistory'
+
+import ServantAndCraftEssence from '@/components/Dashboard/ServantAndCraftEssence/Index'
+import ServantList from '@/components/Dashboard/ServantAndCraftEssence/ServantList'
+import CraftEssenceList from '@/components/Dashboard/ServantAndCraftEssence/CraftEssenceList'
 
 Vue.use(Router)
 
