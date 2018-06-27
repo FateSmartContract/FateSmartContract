@@ -29,14 +29,14 @@ window.addEventListener('load', function () {
             tokenQuartzAmount: state => state.tokenQuartzAmount
         },
         mutations: {
-            updateTokenQuartzAmount (state, amount) {
+            setTokenQuartzAmount (state, amount) {
                 state.tokenQuartzAmount = amount
             }
         },
         actions: {
             web3UpdateTokenQuartzAmount ({commit, state}) {
                 player.getTokenQuartzAmount().then(result => {
-                    commit('updateTokenQuartzAmount', result.toNumber())
+                    commit('setTokenQuartzAmount', result.toNumber())
                 })
             }
         }
