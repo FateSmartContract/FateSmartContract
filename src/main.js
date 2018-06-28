@@ -8,7 +8,40 @@ import router from './router'
 
 import player from '@/js/player'
 
+Vue.use(Vuex)
+
+let store
+let isInitWeb3 = false
+
 window.addEventListener('load', function () {
+    store = initStore()
+
+    /* eslint-disable no-new */
+    new Vue({
+        el: '#app',
+        router,
+        store,
+        template: '<App/>',
+        components: {App}
+    })
+
+    router.afterEach((to, from) => {
+        if (to.redirectedFrom === '/dashboard') {
+            initWeb3()
+        }
+    })
+
+    if (router.currentRoute.path.startsWith('/dashboard')) {
+        initWeb3()
+    }
+})
+
+function initWeb3 () {
+    if (isInitWeb3) {
+        return
+    }
+    isInitWeb3 = true
+
     if (typeof web3 !== 'undefined') {
         console.log('Web3 injected browser: OK.')
         window.web3 = new Web3(window.web3.currentProvider)
@@ -16,10 +49,27 @@ window.addEventListener('load', function () {
         console.log('Web3 injected browser: Fail. You should consider trying MetaMask.')
         // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
         window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+        // FIXME: if no local node can use ?
     }
 
-    Vue.use(Vuex)
-    const store = new Vuex.Store({
+    if (typeof window.web3 !== 'undefined') {
+        player.init().then(function () {
+            store.dispatch('web3UpdateTokenQuartzAmount')
+        })
+
+        const filter = window.web3.eth.filter('latest')
+        filter.watch((err, res) => {
+            if (err) {
+                console.log(`Watch error: ${err}`)
+            } else {
+                store.dispatch('web3UpdateTokenQuartzAmount')
+            }
+        })
+    }
+}
+
+function initStore () {
+    return new Vuex.Store({
         state: {
             tokenQuartzAmount: null
         },
@@ -39,29 +89,4 @@ window.addEventListener('load', function () {
             }
         }
     })
-
-    /* eslint-disable no-new */
-    new Vue({
-        el: '#app',
-        router,
-        store,
-        template: '<App/>',
-        components: {App}
-    })
-
-    if (typeof window.web3 !== 'undefined') {
-        player.init().then(function () {
-            store.dispatch('web3UpdateTokenQuartzAmount')
-        })
-
-        const filter = window.web3.eth.filter('latest')
-        filter.watch((err, res) => {
-            if (err) {
-                console.log(`Watch error: ${err}`)
-            } else {
-                store.dispatch('web3UpdateTokenQuartzAmount')
-            }
-        })
-    }
-})
-
+}

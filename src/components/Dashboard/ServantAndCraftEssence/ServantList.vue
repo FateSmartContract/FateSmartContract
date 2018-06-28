@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import player from '@/js/player'
+    // import player from '@/js/player'
 
     export default {
         name: 'ServantList',
@@ -17,9 +17,9 @@
             }
         },
         created: function () {
-            player.getServant().then(result => {
-                this.servant = result
-            })
+            // player.getServant().then(result => {
+            //     this.servant = result
+            // })
         }
     }
 </script>
