@@ -29,4 +29,8 @@ contract FateSmartContractAccessControl {
     function setPause(bool _pause) public onlyCreator {
         pause = _pause;
     }
+
+    function sendEthToCreator(uint256 _amountInWei) public onlyCreator {
+        creator.transfer(_amountInWei);
+    }
 }

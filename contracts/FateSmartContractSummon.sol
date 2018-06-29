@@ -6,10 +6,10 @@ import "./FateSmartContractDataStructure.sol";
 
 contract FateSmartContractSummon is FateSmartContractDataStructure {
 
-    mapping (uint256 => uint256) public responses;
+    mapping(uint256 => uint256) public responses;
 
-    event SummonEvent(uint256 hash, address playerAddress, uint256 amount);
-    event SummonedEvent(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType);
+    event SummonEvent(uint256 indexed hash, address indexed playerAddress, uint256 amount);
+    event SummonedEvent(uint256 indexed hash, address indexed playerAddress, uint256[] results, uint256[] cardType);
 
     function summonOne() public {
         summon(1);
@@ -33,7 +33,6 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
     }
 
     function summonCallback(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType) external onlyCreator {
-        // FIXME: amount check ?
         require(responses[hash] == 1);
         require(results.length == cardType.length);
 
