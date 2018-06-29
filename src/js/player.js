@@ -30,8 +30,8 @@ const Player = {
             self.instance.getTokenQuartzAmount.call(
                 window.web3.eth.accounts[0],
                 {from: window.web3.eth.accounts[0]}
-            ).then(tx => {
-                resolve(tx)
+            ).then(result => {
+                resolve(result.toNumber())
             }).catch(err => {
                 reject(err)
             })

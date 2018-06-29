@@ -55,6 +55,8 @@ function initWeb3 () {
     if (typeof window.web3 !== 'undefined') {
         player.init().then(function () {
             store.dispatch('web3UpdateTokenQuartzAmount')
+            store.dispatch('web3UpdateServant')
+            store.dispatch('web3UpdateCraftEssence')
 
             // 取得過去發生的 event
             // player.instance.SummonedEvent({}, {
@@ -82,20 +84,40 @@ function initWeb3 () {
 function initStore () {
     return new Vuex.Store({
         state: {
-            tokenQuartzAmount: null
+            tokenQuartzAmount: null,
+            servant: [],
+            craftEssence: []
         },
         getters: {
-            tokenQuartzAmount: state => state.tokenQuartzAmount
+            tokenQuartzAmount: state => state.tokenQuartzAmount,
+            servant: state => state.servant,
+            craftEssence: state => state.craftEssence
         },
         mutations: {
             setTokenQuartzAmount (state, amount) {
                 state.tokenQuartzAmount = amount
+            },
+            setServant (state, _servant) {
+                state.servant = _servant
+            },
+            setCraftEssence (state, _craftEssence) {
+                state.craftEssence = _craftEssence
             }
         },
         actions: {
             web3UpdateTokenQuartzAmount ({commit, state}) {
                 player.getTokenQuartzAmount().then(result => {
-                    commit('setTokenQuartzAmount', result.toNumber())
+                    commit('setTokenQuartzAmount', result)
+                })
+            },
+            web3UpdateServant ({commit, state}) {
+                player.getServant().then(result => {
+                    commit('setServant', result)
+                })
+            },
+            web3UpdateCraftEssence ({commit, state}) {
+                player.getCraftEssence().then(result => {
+                    commit('setCraftEssence', result)
                 })
             }
         }
