@@ -1,7 +1,7 @@
 # [WIP] Fate / Smart Contract
-將抽卡結果儲存在區塊鏈上，讓任何人可以驗證抽卡機率。
-使用 Fate/Grand Order 的抽卡機制作為示範。
-(註：目前區塊鏈是使用 Ethereum Rinkeby Testnet)
+將抽卡結果儲存在區塊鏈上，讓任何人可以驗證抽卡機率。  
+使用 Fate/Grand Order 的抽卡機制作為示範。  
+(註：目前區塊鏈是使用 Ethereum Rinkeby Testnet)  
 
 ```
 truffle.cmd compile
