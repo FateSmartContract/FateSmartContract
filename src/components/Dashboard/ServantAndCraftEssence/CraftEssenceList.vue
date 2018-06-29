@@ -1,8 +1,8 @@
 <template>
-    <div class="row">
-        <div class="col-sm-2" style="padding-top: 15px; padding-bottom: 15px" v-for="id in craftEssence">
+    <div class="row" style="overflow-y: scroll; height: calc(100% - 40px);">
+        <div class="col-sm-2 fgo-card" v-for="id in craftEssence">
             <!--<img src="https://kazemai.github.io/fgo-vz/common/images/Servant/403000_status_servant_1.png" class="img-fluid img-thumbnail"/>-->
-            {{ id }}
+            <img v-holder="'img=256x256?auto=yes&theme=vue&size=24&text=' + id.toString().padStart(3, 0)" class="img-fluid img-thumbnail">
         </div>
     </div>
 </template>
@@ -19,7 +19,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

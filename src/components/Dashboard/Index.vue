@@ -17,7 +17,7 @@
             </router-link>
         </div>
         <div class="container">
-            <router-view class="mt-1 animated fadeIn" style="min-height: calc(100vh - 124px - 2rem)"></router-view>
+            <router-view class="mt-1 animated fadeIn" style="height: calc(100vh - 124px - 2rem)"></router-view>
         </div>
     </div>
 </template>

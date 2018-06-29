@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueHolder from 'vue-holderjs'
 import App from './App'
 import Web3 from 'web3'
 import router from './router'
@@ -9,6 +10,7 @@ import router from './router'
 import player from '@/js/player'
 
 Vue.use(Vuex)
+Vue.use(VueHolder)
 
 let store
 let isInitWeb3 = false

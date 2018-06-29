@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="overflow: hidden; height: 100%">
             <router-link class="btn btn-primary" active-class="active" to="/dashboard/servant-and-craft-essence/servant">　從者　</router-link>
             <router-link class="btn btn-primary" active-class="active" to="/dashboard/servant-and-craft-essence/craft-essence">概念裡裝</router-link>
             <router-view class="mt-1"></router-view>
