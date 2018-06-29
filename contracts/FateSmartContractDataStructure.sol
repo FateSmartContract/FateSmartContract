@@ -7,7 +7,7 @@ import "./FateSmartContractAccessControl.sol";
 contract FateSmartContractDataStructure is FateSmartContractAccessControl {
 
     uint256 private tokenQuartzPriceInWei;
-    uint256 private tokenQuartzAmount;
+    uint256 private tokenQuartzBuyAmount;
 
     struct Player {
         uint256 tokenQuartzAmount;
@@ -21,7 +21,7 @@ contract FateSmartContractDataStructure is FateSmartContractAccessControl {
 
     constructor() public {
         tokenQuartzPriceInWei = 0.09 ether;
-        tokenQuartzAmount = 167;
+        tokenQuartzBuyAmount = 167;
     }
 
     function getTokenQuartzAmount(address playerAddress) public view returns (uint256) {
@@ -48,20 +48,20 @@ contract FateSmartContractDataStructure is FateSmartContractAccessControl {
         return tokenQuartzPriceInWei;
     }
 
-    function setTokenQuartzAmount(uint256 _amount) public onlyCreator {
-        tokenQuartzAmount = _amount;
+    function setTokenQuartzBuyAmount(uint256 _amount) public onlyCreator {
+        tokenQuartzBuyAmount = _amount;
     }
 
-    function getTokenQuartzAmount() public view returns (uint256) {
-        return tokenQuartzAmount;
+    function getTokenQuartzBuyAmount() public view returns (uint256) {
+        return tokenQuartzBuyAmount;
     }
 
     function buyTokenQuartz() public payable {
         require(msg.value == tokenQuartzPriceInWei);
         // overflow check
-        require(players[msg.sender].tokenQuartzAmount + tokenQuartzAmount > 0);
+        require(players[msg.sender].tokenQuartzAmount + tokenQuartzBuyAmount > 0);
 
-        players[msg.sender].tokenQuartzAmount += tokenQuartzAmount;
-        emit BuyTokenQuartz(msg.sender, tokenQuartzAmount);
+        players[msg.sender].tokenQuartzAmount += tokenQuartzBuyAmount;
+        emit BuyTokenQuartz(msg.sender, tokenQuartzBuyAmount);
     }
 }
