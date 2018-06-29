@@ -9,7 +9,7 @@
                                 <i class="mr-3 align-self-center fas fa-cube" style="font-size: 5em;"></i>
                                 <div class="media-body">
                                     <h5 class="card-title">方塊 167 個</h5>
-                                    <p class="m-0">1 Ether</p>
+                                    <p class="m-0">{{ tokenQuartzPrice }} Ether</p>
                                     <span class="btn btn-primary float-right" @click="buyTokenQuartz()">購買</span>
                                 </div>
                             </div>
@@ -22,10 +22,16 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     import player from '@/js/player'
 
     export default {
         name: 'Store',
+        computed: {
+            ...mapGetters([
+                'tokenQuartzPrice'
+            ])
+        },
         methods: {
             buyTokenQuartz: function () {
                 player.buyTokenQuartz()

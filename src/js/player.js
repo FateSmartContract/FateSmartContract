@@ -7,6 +7,8 @@ const Player = {
 
     instance: null,
 
+    tokenQuartzPriceInWei: null,
+
     init: function () {
         let self = this
 
@@ -68,6 +70,21 @@ const Player = {
         })
     },
 
+    getTokenQuartzPriceInWei: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.getTokenQuartzPriceInWei.call(
+                {from: window.web3.eth.accounts[0]}
+            ).then(result => {
+                self.tokenQuartzPriceInWei = result
+                resolve(result)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
     buyTokenQuartz: function () {
         let self = this
 
@@ -75,7 +92,7 @@ const Player = {
             self.instance.buyTokenQuartz(
                 {
                     from: window.web3.eth.accounts[0],
-                    value: window.web3.toWei('1', 'ether')
+                    value: self.tokenQuartzPriceInWei
                 }
             ).then(tx => {
                 resolve(tx)
