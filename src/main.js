@@ -55,6 +55,17 @@ function initWeb3 () {
     if (typeof window.web3 !== 'undefined') {
         player.init().then(function () {
             store.dispatch('web3UpdateTokenQuartzAmount')
+
+            // 取得過去發生的 event
+            // player.instance.SummonedEvent({}, {
+            //     fromBlock: 0, toBlock: 'latest'
+            // }).get(function (error, result) {
+            //     if (error) {
+            //         console.log(`Watch error: ${error}`)
+            //     } else {
+            //         console.log(result)
+            //     }
+            // })
         })
 
         const filter = window.web3.eth.filter('latest')
