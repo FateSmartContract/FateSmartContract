@@ -80,6 +80,15 @@ function initWeb3 () {
                 store.dispatch('web3UpdateTokenQuartzAmount')
             }
         })
+
+        // 每 2000 ms 檢查帳號是否有切換
+        // https://github.com/MetaMask/faq/blob/master/DEVELOPERS.md#ear-listening-for-selected-account-changes
+        let account = window.web3.eth.accounts[0]
+        setInterval(function () {
+            if (window.web3.eth.accounts[0] !== account) {
+                location.reload()
+            }
+        }, 2000)
     }
 }
 
