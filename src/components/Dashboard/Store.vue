@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="overflow: hidden; height: 100%">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
@@ -17,6 +17,17 @@
                     </div>
                 </div>
             </div>
+            <hr/>
+            <h2>購買紀錄</h2>
+            <ul class="list-group" style="overflow-y: auto; height: calc(100% - 219px);">
+                <li v-for="event in buyTokenQuartzEvent" class="list-group-item d-flex justify-content-between align-items-center" style="min-height: 50px">
+                    <span>
+                        <code>{{ event.transactionHash }}</code>
+                        <a :href="'https://rinkeby.etherscan.io/tx/' + event.transactionHash" target="_blank"><i class="fas fa-receipt"></i></a>
+                    </span>
+                    <span><i class="fas fa-cube"></i> {{ event.args.amount.toString() }}</span>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -30,7 +41,8 @@
         computed: {
             ...mapGetters([
                 'tokenQuartzPrice',
-                'tokenQuartzBuyAmount'
+                'tokenQuartzBuyAmount',
+                'buyTokenQuartzEvent'
             ])
         },
         methods: {

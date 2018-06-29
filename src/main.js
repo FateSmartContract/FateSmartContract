@@ -61,17 +61,15 @@ function initWeb3 () {
             store.dispatch('web3UpdateTokenQuartzAmount')
             store.dispatch('web3UpdateServant')
             store.dispatch('web3UpdateCraftEssence')
+            store.dispatch('web3UpdateBuyTokenQuartzEvent')
 
-            // 取得過去發生的 event
-            // player.instance.SummonedEvent({}, {
-            //     fromBlock: 0, toBlock: 'latest'
-            // }).get(function (error, result) {
-            //     if (error) {
-            //         console.log(`Watch error: ${error}`)
-            //     } else {
-            //         console.log(result)
-            //     }
-            // })
+            player.instance.BuyTokenQuartz({playerAddress: window.web3.eth.accounts[0]}, function (err, result) {
+                if (err) {
+                    console.log(`Watch error: ${err}`)
+                } else {
+                    store.commit('addBuyTokenQuartzEvent', result)
+                }
+            })
         })
 
         const filter = window.web3.eth.filter('latest')
@@ -92,14 +90,16 @@ function initStore () {
             tokenQuartzBuyAmount: null,
             tokenQuartzAmount: null,
             servant: [],
-            craftEssence: []
+            craftEssence: [],
+            buyTokenQuartzEvent: []
         },
         getters: {
             tokenQuartzPrice: state => state.tokenQuartzPrice,
             tokenQuartzBuyAmount: state => state.tokenQuartzBuyAmount,
             tokenQuartzAmount: state => state.tokenQuartzAmount,
             servant: state => state.servant,
-            craftEssence: state => state.craftEssence
+            craftEssence: state => state.craftEssence,
+            buyTokenQuartzEvent: state => state.buyTokenQuartzEvent
         },
         mutations: {
             setTokenQuartzPriceInWei (state, priceInWei) {
@@ -116,6 +116,18 @@ function initStore () {
             },
             setCraftEssence (state, _craftEssence) {
                 state.craftEssence = _craftEssence
+            },
+            setBuyTokenQuartzEvent (state, _buyTokenQuartzEventList) {
+                state.buyTokenQuartzEvent = _buyTokenQuartzEventList
+            },
+            addBuyTokenQuartzEvent (state, _buyTokenQuartzEvent) {
+                let length = state.buyTokenQuartzEvent.length
+                if (length > 0 &&
+                    state.buyTokenQuartzEvent[length - 1].transactionHash === _buyTokenQuartzEvent.transactionHash) {
+                    return
+                }
+
+                state.buyTokenQuartzEvent.push(_buyTokenQuartzEvent)
             }
         },
         actions: {
@@ -142,6 +154,19 @@ function initStore () {
             web3UpdateCraftEssence ({commit, state}) {
                 player.getCraftEssence().then(result => {
                     commit('setCraftEssence', result)
+                })
+            },
+            web3UpdateBuyTokenQuartzEvent ({commit, state}) {
+                player.instance.BuyTokenQuartz({
+                    playerAddress: window.web3.eth.accounts[0]
+                }, {
+                    fromBlock: 0, toBlock: 'latest'
+                }).get(function (error, result) {
+                    if (error) {
+                        console.log(`Watch error: ${error}`)
+                    } else {
+                        commit('setBuyTokenQuartzEvent', result)
+                    }
                 })
             }
         }
