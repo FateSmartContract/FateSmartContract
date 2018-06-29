@@ -57,6 +57,7 @@ function initWeb3 () {
     if (typeof window.web3 !== 'undefined') {
         player.init().then(function () {
             store.dispatch('web3UpdateTokenQuartzPriceInWei')
+            store.dispatch('web3UpdateTokenQuartzBuyAmount')
             store.dispatch('web3UpdateTokenQuartzAmount')
             store.dispatch('web3UpdateServant')
             store.dispatch('web3UpdateCraftEssence')
@@ -88,12 +89,14 @@ function initStore () {
     return new Vuex.Store({
         state: {
             tokenQuartzPrice: null,
+            tokenQuartzBuyAmount: null,
             tokenQuartzAmount: null,
             servant: [],
             craftEssence: []
         },
         getters: {
             tokenQuartzPrice: state => state.tokenQuartzPrice,
+            tokenQuartzBuyAmount: state => state.tokenQuartzBuyAmount,
             tokenQuartzAmount: state => state.tokenQuartzAmount,
             servant: state => state.servant,
             craftEssence: state => state.craftEssence
@@ -101,6 +104,9 @@ function initStore () {
         mutations: {
             setTokenQuartzPriceInWei (state, priceInWei) {
                 state.tokenQuartzPrice = window.web3.fromWei(priceInWei, 'ether').toNumber()
+            },
+            setTokenQuartzBuyAmount (state, amount) {
+                state.tokenQuartzBuyAmount = amount.toNumber()
             },
             setTokenQuartzAmount (state, amount) {
                 state.tokenQuartzAmount = amount
@@ -116,6 +122,11 @@ function initStore () {
             web3UpdateTokenQuartzPriceInWei ({commit, state}) {
                 player.getTokenQuartzPriceInWei().then(result => {
                     commit('setTokenQuartzPriceInWei', result)
+                })
+            },
+            web3UpdateTokenQuartzBuyAmount ({commit, state}) {
+                player.getTokenQuartzBuyAmount().then(result => {
+                    commit('setTokenQuartzBuyAmount', result)
                 })
             },
             web3UpdateTokenQuartzAmount ({commit, state}) {

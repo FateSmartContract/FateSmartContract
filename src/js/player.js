@@ -85,6 +85,20 @@ const Player = {
         })
     },
 
+    getTokenQuartzBuyAmount: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.getTokenQuartzBuyAmount.call(
+                {from: window.web3.eth.accounts[0]}
+            ).then(result => {
+                resolve(result)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
     buyTokenQuartz: function () {
         let self = this
 
