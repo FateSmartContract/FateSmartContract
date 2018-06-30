@@ -25,12 +25,11 @@ test-migrate:
   before_script:
     - npm install -g ganache-cli
     - npm install -g truffle
-    - ganache-cli -p 7545 &
+    - ganache-cli -p 7545 > /dev/null &
+    - sleep 1s
   script:
+    - truffle compile
     - truffle migrate --reset
-  after_script:
-    # when a test fails - try to kill it in the after_script. this looks rather complicated, but it makes sure your builds dont fail when the tests succeedes and the lite-server is already killed. to have a successfull build we ensure a non-error return code (exit 0)
-    - /bin/bash -c '/usr/bin/killall -q ganache-cli; exit 0'
 
 #test-truffle:
 #  stage: test
@@ -39,9 +38,12 @@ test-migrate:
 #    key: $CI_COMMIT_REF_NAME
 #    paths:
 #      - node_modules
-#  script:
+#  before_script:
 #    - npm install -g ganache-cli
-#    - ganache-cli -p 7545 &
+#    - npm install -g truffle
+#    - ganache-cli -p 7545 > /dev/null &
+#    - sleep 1s
+#  script:
 #    - yarn run test/truffle
 #
 #test-dapp:
@@ -51,7 +53,10 @@ test-migrate:
 #    key: $CI_COMMIT_REF_NAME
 #    paths:
 #      - node_modules
-#  script:
+#  before_script:
 #    - npm install -g ganache-cli
-#    - ganache-cli -p 7545 &
+#    - npm install -g truffle
+#    - ganache-cli -p 7545 > /dev/null &
+#    - sleep 1s
+#  script:
 #    - yarn run test/dapp
