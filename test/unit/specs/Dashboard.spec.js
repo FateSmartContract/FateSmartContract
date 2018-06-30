@@ -1,12 +1,12 @@
 import Vue from 'vue'
-import Dashboard from '@/components/Dashboard'
+import Index from '@/components/Index'
 import router from '@/router'
 
-describe('Dashboard.vue', () => {
+describe('Index.vue', () => {
     it('should render correct contents', () => {
-        const Constructor = Vue.extend(Dashboard)
+        const Constructor = Vue.extend(Index)
         const vm = new Constructor({router}).$mount()
-        expect(vm.$el.querySelector('.dashboard h1').textContent)
-            .to.equal('Welcome to your truffle-vue dApp')
+        expect(vm.$el.querySelector('.display-4 h1').textContent)
+            .to.equal('Fate/Smart Contract')
     })
 })
