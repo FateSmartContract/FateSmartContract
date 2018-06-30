@@ -1,20 +1,52 @@
 stages:
-    - build
-    - test
+  - build
+  - test
 
 build:
-    stage: build
-    image: node:8-alpine
-    cache: # Speed up builds
-        key: $CI_COMMIT_REF_NAME
-        paths:
-            - vendor
-            - node_modules
-    script:
-        - npm install -g truffle
-        - npm install -g ganache-cli
-        - yarn install
-        - ganache-cli -p 7545
-        - truffle compile
-        - truffle migrate
-        - yarn run build
+  stage: build
+  image: node:8
+  cache: # Speed up builds
+    key: $CI_COMMIT_REF_NAME
+    paths:
+      - node_modules
+  script:
+    - npm install -g truffle
+    - yarn install
+    - truffle compile
+    - yarn run build
+
+test-migrate:
+  stage: test
+  image: node:8
+  cache: # Speed up builds
+    key: $CI_COMMIT_REF_NAME
+    paths:
+      - node_modules
+  script:
+    - npm install -g ganache-cli
+    - ganache-cli -p 7545
+    - truffle migrate --reset
+
+test-truffle:
+  stage: test
+  image: node:8
+  cache: # Speed up builds
+    key: $CI_COMMIT_REF_NAME
+    paths:
+      - node_modules
+  script:
+    - npm install -g ganache-cli
+    - ganache-cli -p 7545
+    - yarn run test/truffle
+
+test-dapp:
+  stage: test
+  image: node:8
+  cache: # Speed up builds
+    key: $CI_COMMIT_REF_NAME
+    paths:
+      - node_modules
+  script:
+    - npm install -g ganache-cli
+    - ganache-cli -p 7545
+    - yarn run test/dapp
