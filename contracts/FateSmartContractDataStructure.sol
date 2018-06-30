@@ -63,5 +63,7 @@ contract FateSmartContractDataStructure is FateSmartContractAccessControl {
 
         players[msg.sender].tokenQuartzAmount += tokenQuartzBuyAmount;
         emit BuyTokenQuartz(msg.sender, tokenQuartzBuyAmount);
+
+        // TODO: 直接回傳新的數量 ?
     }
 }
