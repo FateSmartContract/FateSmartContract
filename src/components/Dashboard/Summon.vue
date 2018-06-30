@@ -1,24 +1,31 @@
 <template>
-    <div class="card summon-card">
-        <div class="card-body" style="position: relative;">
-            <div style="">
-                <h1 class="text-center display-1 summon-title">卡池 001</h1>
+    <div>
+        <div class="card summon-card" v-if="!summoning" style="height: inherit">
+            <div class="card-body" style="position: relative;">
+                <div style="">
+                    <h1 class="text-center display-1 summon-title">卡池 001</h1>
+                </div>
+                <div class="text-center summon-button-div">
+                    <div style="display: inline-block">
+                        <button type="button" class="btn btn-primary btn-lg btn-summon" @click="summonOne()">
+                            召喚 1 回
+                        </button>
+                        <br/>
+                        <span><i class="fas fa-cube"></i> 消耗 方塊 * 3</span>
+                    </div>
+                    <div style="display: inline-block; margin-left: 25%">
+                        <button type="button" class="btn btn-primary btn-lg btn-summon" @click="summonTen()">
+                            召喚 10 回
+                        </button>
+                        <br/>
+                        <span><i class="fas fa-cube"></i> 消耗 方塊 * 30</span>
+                    </div>
+                </div>
             </div>
-            <div class="text-center summon-button-div">
-                <div style="display: inline-block">
-                    <button type="button" class="btn btn-primary btn-lg btn-summon" @click="summonOne()">
-                        召喚 1 回
-                    </button>
-                    <br/>
-                    <span><i class="fas fa-cube"></i> 消耗 方塊 * 3</span>
-                </div>
-                <div style="display: inline-block; margin-left: 25%">
-                    <button type="button" class="btn btn-primary btn-lg btn-summon" @click="summonTen()">
-                        召喚 10 回
-                    </button>
-                    <br/>
-                    <span><i class="fas fa-cube"></i> 消耗 方塊 * 30</span>
-                </div>
+        </div>
+        <div class="card" v-if="summoning" style="height: inherit">
+            <div class="card-body">
+                召喚中...
             </div>
         </div>
     </div>
@@ -29,12 +36,25 @@
 
     export default {
         name: 'Summon',
+        data () {
+            return {
+                summoning: false
+            }
+        },
         methods: {
             summonOne: function () {
-                player.summonOne()
+                player.summonOne().then((tx) => {
+                    this.summoning = true
+                }).catch(() => {
+                    this.summoning = false
+                })
             },
             summonTen: function () {
-                player.summonTen()
+                player.summonTen().then((tx) => {
+                    this.summoning = true
+                }).catch(() => {
+                    this.summoning = false
+                })
             }
         }
     }
