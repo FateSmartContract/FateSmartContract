@@ -27,12 +27,14 @@ window.addEventListener('load', function () {
         components: {App}
     })
 
+    // 直到進入 /dashboard 才初始化 web3
     router.afterEach((to, from) => {
         if (to.redirectedFrom === '/dashboard') {
             initWeb3()
         }
     })
 
+    // 如果直接進入 /dashboard ，也初始化 web3
     if (router.currentRoute.path.startsWith('/dashboard')) {
         initWeb3()
     }
@@ -55,34 +57,7 @@ function initWeb3 () {
     }
 
     if (typeof window.web3 !== 'undefined') {
-        player.init().then(function () {
-            store.dispatch('web3UpdateTokenQuartzPriceInWei')
-            store.dispatch('web3UpdateTokenQuartzBuyAmount')
-            store.dispatch('web3UpdateTokenQuartzAmount')
-            store.dispatch('web3UpdateServant')
-            store.dispatch('web3UpdateCraftEssence')
-            store.dispatch('web3UpdateBuyTokenQuartzEvent')
-
-            player.instance.BuyTokenQuartz({playerAddress: window.web3.eth.accounts[0]}, function (err, result) {
-                if (err) {
-                    console.log(`Watch error: ${err}`)
-                } else {
-                    store.commit('addBuyTokenQuartzEvent', result)
-                }
-            })
-        })
-        /* TODO: 改偵測 BuyTokenQuartz Event 再更新 web3UpdateTokenQuartzAmount
-           (要提到上方的 player.init().then(function () { ...)
-           (或許提出成 function ?)
-        */
-        const filter = window.web3.eth.filter('latest')
-        filter.watch((err, res) => {
-            if (err) {
-                console.log(`Watch error: ${err}`)
-            } else {
-                store.dispatch('web3UpdateTokenQuartzAmount')
-            }
-        })
+        player.init().then(initDataAndRegisterEvent)
 
         // 每 2000 ms 檢查帳號是否有切換
         // TODO: 順便偵測 network id (希望取得 network id 不會負擔太重)
@@ -95,6 +70,30 @@ function initWeb3 () {
             }
         }, 2000)
     }
+}
+
+function initDataAndRegisterEvent () {
+    store.dispatch('web3UpdateTokenQuartzPriceInWei')
+    store.dispatch('web3UpdateTokenQuartzBuyAmount')
+    store.dispatch('web3UpdateTokenQuartzAmount')
+    store.dispatch('web3UpdateServant')
+    store.dispatch('web3UpdateCraftEssence')
+    store.dispatch('web3UpdateBuyTokenQuartzEvent')
+
+    registerEvent()
+}
+
+function registerEvent () {
+    player.instance.BuyTokenQuartz({
+        playerAddress: window.web3.eth.accounts[0]
+    }, function (err, result) {
+        if (err) {
+            console.log(`Watch error: ${err}`)
+        } else {
+            store.commit('addBuyTokenQuartzEvent', result)
+            store.dispatch('web3UpdateTokenQuartzAmount')
+        }
+    })
 }
 
 // TODO: 切開成多個 module
