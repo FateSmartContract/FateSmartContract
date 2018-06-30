@@ -19,7 +19,7 @@
             </div>
             <hr/>
             <h2>購買紀錄</h2>
-            <ul class="list-group" style="overflow-y: auto; height: calc(100% - 219px);">
+            <ul v-if="buyTokenQuartzEvent !== null" class="list-group" style="overflow-y: auto; height: calc(100% - 219px);">
                 <li v-for="event in buyTokenQuartzEvent" class="list-group-item d-flex justify-content-between align-items-center" style="min-height: 50px">
                     <span>
                         <code>{{ event.transactionHash }}</code>
@@ -28,6 +28,9 @@
                     <span><i class="fas fa-cube"></i> {{ event.args.amount.toString() }}</span>
                 </li>
             </ul>
+            <div v-if="buyTokenQuartzEvent === null" class="text-center">
+                <i class="fas fa-spinner fa-spin fa-3x"></i>
+            </div>
         </div>
     </div>
 </template>

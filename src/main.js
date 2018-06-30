@@ -105,7 +105,7 @@ function initStore () {
             tokenQuartzAmount: null,
             servant: [],
             craftEssence: [],
-            buyTokenQuartzEvent: []
+            buyTokenQuartzEvent: null
         },
         getters: {
             tokenQuartzPrice: state => state.tokenQuartzPrice,
@@ -139,6 +139,10 @@ function initStore () {
                 if (length > 0 &&
                     state.buyTokenQuartzEvent[length - 1].transactionHash === _buyTokenQuartzEvent.transactionHash) {
                     return
+                }
+
+                if (state.buyTokenQuartzEvent === null) {
+                    state.buyTokenQuartzEvent = []
                 }
 
                 state.buyTokenQuartzEvent.push(_buyTokenQuartzEvent)
@@ -186,3 +190,16 @@ function initStore () {
         }
     })
 }
+
+/* eslint-disable no-unused-vars */
+function sleep (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+/*
+async function demo() {
+  console.log('Taking a break...');
+  await sleep(2000);
+  console.log('Two second later');
+}
+ */
