@@ -97,6 +97,7 @@ function registerEvent () {
 }
 
 // TODO: 切開成多個 module
+// https://vuex.vuejs.org/zh/guide/structure.html
 function initStore () {
     return new Vuex.Store({
         state: {
