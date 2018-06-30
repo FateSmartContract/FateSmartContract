@@ -24,6 +24,7 @@ test-migrate:
       - node_modules
   before_script:
     - npm install -g ganache-cli
+    - npm install -g truffle
     - ganache-cli -p 7545 &
   script:
     - truffle migrate --reset
