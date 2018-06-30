@@ -71,7 +71,10 @@ function initWeb3 () {
                 }
             })
         })
-
+        /* TODO: 改偵測 BuyTokenQuartz Event 再更新 web3UpdateTokenQuartzAmount
+           (要提到上方的 player.init().then(function () { ...)
+           (或許提出成 function ?)
+        */
         const filter = window.web3.eth.filter('latest')
         filter.watch((err, res) => {
             if (err) {
@@ -82,6 +85,8 @@ function initWeb3 () {
         })
 
         // 每 2000 ms 檢查帳號是否有切換
+        // TODO: 順便偵測 network id (希望取得 network id 不會負擔太重)
+        // TODO: 提出成 function
         // https://github.com/MetaMask/faq/blob/master/DEVELOPERS.md#ear-listening-for-selected-account-changes
         let account = window.web3.eth.accounts[0]
         setInterval(function () {
@@ -92,6 +97,7 @@ function initWeb3 () {
     }
 }
 
+// TODO: 切開成多個 module
 function initStore () {
     return new Vuex.Store({
         state: {
