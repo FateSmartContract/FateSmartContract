@@ -204,3 +204,7 @@ async function demo() {
   console.log('Two second later');
 }
  */
+
+/*
+.then(() => new Promise(resolve => setTimeout(resolve, 1000)))
+*/
