@@ -14,7 +14,6 @@ const getters = {
 
 // mutations
 const mutations = {
-
     setTokenQuartzPriceInWei (state, priceInWei) {
         state.tokenQuartzPrice = window.web3.fromWei(priceInWei, 'ether').toNumber()
     },
