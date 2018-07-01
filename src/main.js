@@ -100,6 +100,7 @@ function registerEvent () {
         if (err) {
             console.log(`Watch error: ${err}`)
         } else {
+            store.commit('game/setSummoningHash', result.args.hash)
             store.commit('summonHistory/addSummonEvent', result)
         }
     })
@@ -110,6 +111,11 @@ function registerEvent () {
         if (err) {
             console.log(`Watch error: ${err}`)
         } else {
+            store.commit('game/setSummoningResult', {
+                hash: result.args.hash,
+                result: result.args.results.map(e => e.toNumber()),
+                resultType: result.args.cardType.map(e => e.toNumber())
+            })
             store.commit('summonHistory/addSummonedEvent', result)
 
             store.dispatch('player/web3UpdateServant')

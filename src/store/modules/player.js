@@ -31,14 +31,14 @@ const mutations = {
         state.buyTokenQuartzEvent = _buyTokenQuartzEventList
     },
     addBuyTokenQuartzEvent (state, _buyTokenQuartzEvent) {
+        if (state.buyTokenQuartzEvent === null) {
+            state.buyTokenQuartzEvent = []
+        }
+
         let length = state.buyTokenQuartzEvent.length
         if (length > 0 &&
             state.buyTokenQuartzEvent[length - 1].transactionHash === _buyTokenQuartzEvent.transactionHash) {
             return
-        }
-
-        if (state.buyTokenQuartzEvent === null) {
-            state.buyTokenQuartzEvent = []
         }
 
         state.buyTokenQuartzEvent.push(_buyTokenQuartzEvent)

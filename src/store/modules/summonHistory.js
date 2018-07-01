@@ -18,14 +18,14 @@ const mutations = {
         state.summonEvent = _summonEventList
     },
     addSummonEvent (state, _summonEvent) {
+        if (state.summonEvent === null) {
+            state.summonEvent = []
+        }
+
         let length = state.summonEvent.length
         if (length > 0 &&
             state.summonEvent[length - 1].transactionHash === _summonEvent.transactionHash) {
             return
-        }
-
-        if (state.summonEvent === null) {
-            state.summonEvent = []
         }
 
         state.summonEvent.push(_summonEvent)
@@ -34,14 +34,14 @@ const mutations = {
         state.summonedEvent = _summonedEventList
     },
     addSummonedEvent (state, _summonedEvent) {
+        if (state.summonedEvent === null) {
+            state.summonedEvent = []
+        }
+
         let length = state.summonedEvent.length
         if (length > 0 &&
             state.summonedEvent[length - 1].transactionHash === _summonedEvent.transactionHash) {
             return
-        }
-
-        if (state.summonedEvent === null) {
-            state.summonedEvent = []
         }
 
         state.summonedEvent.push(_summonedEvent)

@@ -26,16 +26,8 @@
         <div class="card summon-card" v-if="summoning" style="height: inherit" @click="closeSummoningPage()">
             <div class="card-body d-flex" style="position: relative;">
                 <div class="container" style="position: absolute; top: 50%; left: 0; transform: translate(0, -50%);">
-                    <div class="row" style="padding-bottom: 15px">
-                        <div class="col-md-2" v-for="i in 6" style="position: relative;">
-                            <img v-holder="'img=256x256?auto=yes&theme=vue&text=%20'" class="img-fluid img-thumbnail">
-                            <span class="fa-center">
-                                <i class="fas fa-spinner fa-pulse fa-4x"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center" style="padding-top: 15px">
-                        <div class="col-md-2" v-for="i in 4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-2 col-card" v-for="i in summonAmount" style="position: relative;">
                             <img v-holder="'img=256x256?auto=yes&theme=vue&text=%20'" class="img-fluid img-thumbnail">
                             <span class="fa-center">
                                 <i class="fas fa-spinner fa-pulse fa-4x"></i>
@@ -59,22 +51,24 @@
         name: 'Summon',
         computed: {
             ...mapGetters('game', [
-                'summoning'
+                'summoning',
+                'summonAmount',
+                'summonResult'
             ])
         },
         methods: {
             summonOne: function () {
-                player.summonOne().then((tx) => {
-                    this.$store.commit('game/setSummoning', true)
+                player.summonOne().then((result) => {
+                    this.$store.commit('game/beginSummoning', 1)
                 })
             },
             summonTen: function () {
-                player.summonTen().then((tx) => {
-                    this.$store.commit('game/setSummoning', true)
+                player.summonTen().then((result) => {
+                    this.$store.commit('game/beginSummoning', 10)
                 })
             },
             closeSummoningPage: function () {
-                this.$store.commit('game/setSummoning', false)
+                this.$store.commit('game/endSummoning')
             }
         }
     }
@@ -104,6 +98,11 @@
         left: 0;
         right: 0;
         bottom: 10%;
+    }
+
+    .col-card {
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
     .fa-center {
