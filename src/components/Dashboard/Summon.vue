@@ -87,6 +87,8 @@
         methods: {
             summonOne: function () {
                 player.summonOne().then((result) => {
+                    this.$store.dispatch('player/web3UpdateTokenQuartzAmount')
+
                     this.showIndex = 0
                     this.showCard = [false]
                     this.$store.commit('game/beginSummoning', 1)
@@ -94,6 +96,8 @@
             },
             summonTen: function () {
                 player.summonTen().then((result) => {
+                    this.$store.dispatch('player/web3UpdateTokenQuartzAmount')
+
                     this.showIndex = 0
                     this.showCard = []
                     for (let i = 0; i < 10; i++) {
