@@ -21,11 +21,11 @@ const mutations = {
     setTokenQuartzAmount (state, amount) {
         state.tokenQuartzAmount = amount
     },
-    setServant (state, _servant) {
-        state.servant = _servant
+    setServant (state, _servantList) {
+        state.servant = _servantList
     },
-    setCraftEssence (state, _craftEssence) {
-        state.craftEssence = _craftEssence
+    setCraftEssence (state, _craftEssenceList) {
+        state.craftEssence = _craftEssenceList
     },
     setBuyTokenQuartzEvent (state, _buyTokenQuartzEventList) {
         state.buyTokenQuartzEvent = _buyTokenQuartzEventList

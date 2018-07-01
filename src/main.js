@@ -76,6 +76,8 @@ function initDataAndRegisterEvent () {
     store.dispatch('player/web3UpdateServant')
     store.dispatch('player/web3UpdateCraftEssence')
     store.dispatch('player/web3UpdateBuyTokenQuartzEvent')
+    store.dispatch('summonHistory/web3UpdateSummonEvent')
+    store.dispatch('summonHistory/web3UpdateSummonedEvent')
 
     registerEvent()
 }
@@ -89,6 +91,29 @@ function registerEvent () {
         } else {
             store.commit('player/addBuyTokenQuartzEvent', result)
             store.dispatch('player/web3UpdateTokenQuartzAmount')
+        }
+    })
+
+    player.instance.SummonEvent({
+        playerAddress: window.web3.eth.accounts[0]
+    }, function (err, result) {
+        if (err) {
+            console.log(`Watch error: ${err}`)
+        } else {
+            store.commit('summonHistory/addSummonEvent', result)
+        }
+    })
+
+    player.instance.SummonedEvent({
+        playerAddress: window.web3.eth.accounts[0]
+    }, function (err, result) {
+        if (err) {
+            console.log(`Watch error: ${err}`)
+        } else {
+            store.commit('summonHistory/addSummonedEvent', result)
+
+            store.dispatch('player/web3UpdateServant')
+            store.dispatch('player/web3UpdateCraftEssence')
         }
     })
 }
