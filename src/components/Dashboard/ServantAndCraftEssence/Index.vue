@@ -4,11 +4,11 @@
             <router-link class="btn btn-outline-primary" active-class="active" to="/dashboard/servant-and-craft-essence/servant">
                 　從者　
             </router-link>
-            <span class="btn btn-outline-dark btn-lg btn-outline-display">{{ servant.length }}</span>
+            <span class="btn btn-outline-dark btn-lg btn-outline-display">{{ getServantAmount }}</span>
             <router-link class="btn btn-outline-primary" active-class="active" to="/dashboard/servant-and-craft-essence/craft-essence">
                 概念裡裝
             </router-link>
-            <span class="btn btn-outline-dark btn-lg btn-outline-display">{{ craftEssence.length }}</span>
+            <span class="btn btn-outline-dark btn-lg btn-outline-display">{{ getCraftEssenceAmount }}</span>
             <router-view class="mt-1"></router-view>
         </div>
     </div>
@@ -23,7 +23,13 @@
             ...mapGetters([
                 'servant',
                 'craftEssence'
-            ])
+            ]),
+            getServantAmount () {
+                return this.servant === null ? 0 : this.servant.length
+            },
+            getCraftEssenceAmount () {
+                return this.craftEssence === null ? 0 : this.craftEssence.length
+            }
         }
     }
 </script>

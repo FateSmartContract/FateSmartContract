@@ -104,8 +104,8 @@ function initStore () {
             tokenQuartzPrice: null,
             tokenQuartzBuyAmount: null,
             tokenQuartzAmount: null,
-            servant: [],
-            craftEssence: [],
+            servant: null,
+            craftEssence: null,
             buyTokenQuartzEvent: null
         },
         getters: {
@@ -191,20 +191,3 @@ function initStore () {
         }
     })
 }
-
-/* eslint-disable no-unused-vars */
-function sleep (ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-}
-
-/*
-async function demo() {
-  console.log('Taking a break...');
-  await sleep(2000);
-  console.log('Two second later');
-}
- */
-
-/*
-.then(() => new Promise(resolve => setTimeout(resolve, 1000)))
-*/
