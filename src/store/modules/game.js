@@ -3,13 +3,15 @@ import player from '@/js/player'
 // initial state
 const state = {
     tokenQuartzPrice: null,
-    tokenQuartzBuyAmount: null
+    tokenQuartzBuyAmount: null,
+    summoning: true // FIXME: false
 }
 
 // getters
 const getters = {
     tokenQuartzPrice: state => state.tokenQuartzPrice,
-    tokenQuartzBuyAmount: state => state.tokenQuartzBuyAmount
+    tokenQuartzBuyAmount: state => state.tokenQuartzBuyAmount,
+    summoning: state => state.summoning
 }
 
 // mutations
@@ -19,6 +21,9 @@ const mutations = {
     },
     setTokenQuartzBuyAmount (state, amount) {
         state.tokenQuartzBuyAmount = amount.toNumber()
+    },
+    setSummoning (state, value) {
+        state.summoning = value
     }
 }
 

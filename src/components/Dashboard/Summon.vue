@@ -23,38 +23,58 @@
                 </div>
             </div>
         </div>
-        <div class="card" v-if="summoning" style="height: inherit">
-            <div class="card-body">
-                召喚中...
+        <div class="card summon-card" v-if="summoning" style="height: inherit" @click="closeSummoningPage()">
+            <div class="card-body d-flex" style="position: relative;">
+                <div class="container" style="position: absolute; top: 50%; left: 0; transform: translate(0, -50%);">
+                    <div class="row" style="padding-bottom: 15px">
+                        <div class="col-md-2" v-for="i in 6" style="position: relative;">
+                            <img v-holder="'img=256x256?auto=yes&theme=vue&text=%20'" class="img-fluid img-thumbnail">
+                            <span class="fa-center">
+                                <i class="fas fa-spinner fa-pulse fa-4x"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" style="padding-top: 15px">
+                        <div class="col-md-2" v-for="i in 4">
+                            <img v-holder="'img=256x256?auto=yes&theme=vue&text=%20'" class="img-fluid img-thumbnail">
+                            <span class="fa-center">
+                                <i class="fas fa-spinner fa-pulse fa-4x"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100" style="position: absolute; bottom: 10%">
+                    <h2 class="text-center font-weight-bold mb-0">點擊空白處繼續</h2>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     import player from '@/js/player'
 
     export default {
         name: 'Summon',
-        data () {
-            return {
-                summoning: false
-            }
+        computed: {
+            ...mapGetters('game', [
+                'summoning'
+            ])
         },
         methods: {
             summonOne: function () {
                 player.summonOne().then((tx) => {
-                    this.summoning = true
-                }).catch(() => {
-                    this.summoning = false
+                    this.$store.commit('game/setSummoning', true)
                 })
             },
             summonTen: function () {
                 player.summonTen().then((tx) => {
-                    this.summoning = true
-                }).catch(() => {
-                    this.summoning = false
+                    this.$store.commit('game/setSummoning', true)
                 })
+            },
+            closeSummoningPage: function () {
+                this.$store.commit('game/setSummoning', false)
             }
         }
     }
@@ -84,5 +104,12 @@
         left: 0;
         right: 0;
         bottom: 10%;
+    }
+
+    .fa-center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
