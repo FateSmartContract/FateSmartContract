@@ -1,23 +1,20 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import Vuex from 'vuex'
 import VueHolder from 'vue-holderjs'
-import App from './App'
 import Web3 from 'web3'
-import router from './router'
 
+import router from './router'
+import store from './store'
+
+import App from './App'
 import player from '@/js/player'
 
-Vue.use(Vuex)
 Vue.use(VueHolder)
 
-let store
 let isInitWeb3 = false
 
 window.addEventListener('load', function () {
-    store = initStore()
-
     /* eslint-disable no-new */
     new Vue({
         el: '#app',
@@ -73,12 +70,12 @@ function initWeb3 () {
 }
 
 function initDataAndRegisterEvent () {
-    store.dispatch('web3UpdateTokenQuartzPriceInWei')
-    store.dispatch('web3UpdateTokenQuartzBuyAmount')
-    store.dispatch('web3UpdateTokenQuartzAmount')
-    store.dispatch('web3UpdateServant')
-    store.dispatch('web3UpdateCraftEssence')
-    store.dispatch('web3UpdateBuyTokenQuartzEvent')
+    store.dispatch('game/web3UpdateTokenQuartzPriceInWei')
+    store.dispatch('game/web3UpdateTokenQuartzBuyAmount')
+    store.dispatch('player/web3UpdateTokenQuartzAmount')
+    store.dispatch('player/web3UpdateServant')
+    store.dispatch('player/web3UpdateCraftEssence')
+    store.dispatch('player/web3UpdateBuyTokenQuartzEvent')
 
     registerEvent()
 }
@@ -90,104 +87,8 @@ function registerEvent () {
         if (err) {
             console.log(`Watch error: ${err}`)
         } else {
-            store.commit('addBuyTokenQuartzEvent', result)
-            store.dispatch('web3UpdateTokenQuartzAmount')
-        }
-    })
-}
-
-// TODO: 切開成多個 module
-// https://vuex.vuejs.org/zh/guide/structure.html
-function initStore () {
-    return new Vuex.Store({
-        state: {
-            tokenQuartzPrice: null,
-            tokenQuartzBuyAmount: null,
-            tokenQuartzAmount: null,
-            servant: null,
-            craftEssence: null,
-            buyTokenQuartzEvent: null
-        },
-        getters: {
-            tokenQuartzPrice: state => state.tokenQuartzPrice,
-            tokenQuartzBuyAmount: state => state.tokenQuartzBuyAmount,
-            tokenQuartzAmount: state => state.tokenQuartzAmount,
-            servant: state => state.servant,
-            craftEssence: state => state.craftEssence,
-            buyTokenQuartzEvent: state => state.buyTokenQuartzEvent
-        },
-        mutations: {
-            setTokenQuartzPriceInWei (state, priceInWei) {
-                state.tokenQuartzPrice = window.web3.fromWei(priceInWei, 'ether').toNumber()
-            },
-            setTokenQuartzBuyAmount (state, amount) {
-                state.tokenQuartzBuyAmount = amount.toNumber()
-            },
-            setTokenQuartzAmount (state, amount) {
-                state.tokenQuartzAmount = amount
-            },
-            setServant (state, _servant) {
-                state.servant = _servant
-            },
-            setCraftEssence (state, _craftEssence) {
-                state.craftEssence = _craftEssence
-            },
-            setBuyTokenQuartzEvent (state, _buyTokenQuartzEventList) {
-                state.buyTokenQuartzEvent = _buyTokenQuartzEventList
-            },
-            addBuyTokenQuartzEvent (state, _buyTokenQuartzEvent) {
-                let length = state.buyTokenQuartzEvent.length
-                if (length > 0 &&
-                    state.buyTokenQuartzEvent[length - 1].transactionHash === _buyTokenQuartzEvent.transactionHash) {
-                    return
-                }
-
-                if (state.buyTokenQuartzEvent === null) {
-                    state.buyTokenQuartzEvent = []
-                }
-
-                state.buyTokenQuartzEvent.push(_buyTokenQuartzEvent)
-            }
-        },
-        actions: {
-            web3UpdateTokenQuartzPriceInWei ({commit, state}) {
-                player.getTokenQuartzPriceInWei().then(result => {
-                    commit('setTokenQuartzPriceInWei', result)
-                })
-            },
-            web3UpdateTokenQuartzBuyAmount ({commit, state}) {
-                player.getTokenQuartzBuyAmount().then(result => {
-                    commit('setTokenQuartzBuyAmount', result)
-                })
-            },
-            web3UpdateTokenQuartzAmount ({commit, state}) {
-                player.getTokenQuartzAmount().then(result => {
-                    commit('setTokenQuartzAmount', result)
-                })
-            },
-            web3UpdateServant ({commit, state}) {
-                player.getServant().then(result => {
-                    commit('setServant', result)
-                })
-            },
-            web3UpdateCraftEssence ({commit, state}) {
-                player.getCraftEssence().then(result => {
-                    commit('setCraftEssence', result)
-                })
-            },
-            web3UpdateBuyTokenQuartzEvent ({commit, state}) {
-                player.instance.BuyTokenQuartz({
-                    playerAddress: window.web3.eth.accounts[0]
-                }, {
-                    fromBlock: 0, toBlock: 'latest'
-                }).get(function (error, result) {
-                    if (error) {
-                        console.log(`Watch error: ${error}`)
-                    } else {
-                        commit('setBuyTokenQuartzEvent', result)
-                    }
-                })
-            }
+            store.commit('player/addBuyTokenQuartzEvent', result)
+            store.dispatch('player/web3UpdateTokenQuartzAmount')
         }
     })
 }

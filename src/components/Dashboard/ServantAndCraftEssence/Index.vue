@@ -20,7 +20,7 @@
     export default {
         name: 'ServantAndCraftEssence',
         computed: {
-            ...mapGetters([
+            ...mapGetters('player', [
                 'servant',
                 'craftEssence'
             ]),

@@ -16,7 +16,7 @@
     export default {
         name: 'ServantList',
         computed: {
-            ...mapGetters([
+            ...mapGetters('player', [
                 'servant'
             ])
         }

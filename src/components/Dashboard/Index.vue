@@ -28,7 +28,7 @@
     export default {
         name: 'Dashboard',
         computed: {
-            ...mapGetters([
+            ...mapGetters('player', [
                 'tokenQuartzAmount'
             ])
         }

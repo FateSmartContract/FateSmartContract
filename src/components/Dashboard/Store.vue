@@ -42,9 +42,11 @@
     export default {
         name: 'Store',
         computed: {
-            ...mapGetters([
+            ...mapGetters('game', [
                 'tokenQuartzPrice',
-                'tokenQuartzBuyAmount',
+                'tokenQuartzBuyAmount'
+            ]),
+            ...mapGetters('player', [
                 'buyTokenQuartzEvent'
             ])
         },

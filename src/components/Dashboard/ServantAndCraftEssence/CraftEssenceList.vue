@@ -16,7 +16,7 @@
     export default {
         name: 'CraftEssenceList',
         computed: {
-            ...mapGetters([
+            ...mapGetters('player', [
                 'craftEssence'
             ])
         }
