@@ -15,7 +15,7 @@ build:
     - truffle compile
     - yarn run build
 
-test-migrate:
+test:
   stage: test
   image: node:8
   cache: # Speed up builds
@@ -30,33 +30,4 @@ test-migrate:
   script:
     - truffle compile
     - truffle migrate --reset
-
-#test-truffle:
-#  stage: test
-#  image: node:8
-#  cache: # Speed up builds
-#    key: $CI_COMMIT_REF_NAME
-#    paths:
-#      - node_modules
-#  before_script:
-#    - npm install -g ganache-cli
-#    - npm install -g truffle
-#    - ganache-cli -p 7545 > /dev/null &
-#    - sleep 1s
-#  script:
-#    - yarn run test/truffle
-#
-#test-dapp:
-#  stage: test
-#  image: node:8
-#  cache: # Speed up builds
-#    key: $CI_COMMIT_REF_NAME
-#    paths:
-#      - node_modules
-#  before_script:
-#    - npm install -g ganache-cli
-#    - npm install -g truffle
-#    - ganache-cli -p 7545 > /dev/null &
-#    - sleep 1s
-#  script:
-#    - yarn run test/dapp
+    - yarn run test
