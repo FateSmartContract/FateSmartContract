@@ -29,7 +29,9 @@ function initSummonedEventMap () {
 // getters
 const getters = {
     isLoaded: state => state.summonIdList !== null && state.summonEventMap !== null && state.summonedEventMap !== null,
-    summonIdList: state => state.summonIdList
+    summonIdList: state => state.summonIdList,
+    summonEventMap: state => state.summonEventMap,
+    summonedEventMap: state => state.summonedEventMap
 }
 
 // mutations
