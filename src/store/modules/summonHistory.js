@@ -2,49 +2,71 @@ import player from '@/js/player'
 
 // initial state
 const state = {
-    summonEvent: null,
-    summonedEvent: null
+    summonIdList: null,
+    // 以 summonId 為 key 的 Map
+    summonEventMap: null,
+    summonedEventMap: null
+}
+
+function initSummonIdList () {
+    if (state.summonIdList === null) {
+        state.summonIdList = []
+    }
+}
+
+function initSummonEventMap () {
+    if (state.summonEventMap === null) {
+        state.summonEventMap = new Map()
+    }
+}
+
+function initSummonedEventMap () {
+    if (state.summonedEventMap === null) {
+        state.summonedEventMap = new Map()
+    }
 }
 
 // getters
 const getters = {
-    summonEvent: state => state.summonEvent,
-    summonedEvent: state => state.summonedEvent
+    isLoaded: state => state.summonIdList !== null && state.summonEventMap !== null && state.summonedEventMap !== null,
+    summonIdList: state => state.summonIdList
 }
 
 // mutations
 const mutations = {
-    setSummonEvent (state, _summonEventList) {
-        state.summonEvent = _summonEventList
+    initSummonEvent (state, summonEventList) {
+        initSummonIdList()
+        initSummonEventMap()
+        summonEventList.forEach((event) => {
+            let id = window.web3.toHex(event.args.hash)
+            state.summonIdList.push(id)
+            state.summonEventMap.set(id, event)
+        })
     },
-    addSummonEvent (state, _summonEvent) {
-        if (state.summonEvent === null) {
-            state.summonEvent = []
+    addSummonEvent (state, event) {
+        initSummonIdList()
+        initSummonEventMap()
+        let id = window.web3.toHex(event.args.hash)
+        if (state.summonEventMap.get(id) === undefined) {
+            state.summonIdList.push(id)
+            state.summonEventMap.set(id, event)
         }
-
-        let length = state.summonEvent.length
-        if (length > 0 &&
-            state.summonEvent[length - 1].transactionHash === _summonEvent.transactionHash) {
-            return
-        }
-
-        state.summonEvent.push(_summonEvent)
     },
-    setSummonedEvent (state, _summonedEventList) {
-        state.summonedEvent = _summonedEventList
+    initSummonedEvent (state, summonedEventList) {
+        initSummonIdList()
+        initSummonedEventMap()
+        summonedEventList.forEach((event) => {
+            let id = window.web3.toHex(event.args.hash)
+            state.summonedEventMap.set(id, event)
+        })
     },
-    addSummonedEvent (state, _summonedEvent) {
-        if (state.summonedEvent === null) {
-            state.summonedEvent = []
+    addSummonedEvent (state, event) {
+        initSummonIdList()
+        initSummonedEventMap()
+        let id = window.web3.toHex(event.args.hash)
+        if (state.summonedEventMap.get(id) === undefined) {
+            state.summonedEventMap.set(id, event)
         }
-
-        let length = state.summonedEvent.length
-        if (length > 0 &&
-            state.summonedEvent[length - 1].transactionHash === _summonedEvent.transactionHash) {
-            return
-        }
-
-        state.summonedEvent.push(_summonedEvent)
     }
 }
 
@@ -52,12 +74,12 @@ const mutations = {
 const actions = {
     web3UpdateSummonEvent ({commit, state}) {
         player.getAllSummonEvent().then(function (result) {
-            commit('setSummonEvent', result)
+            commit('initSummonEvent', result)
         })
     },
     web3UpdateSummonedEvent ({commit, state}) {
         player.getAllSummonedEvent().then(function (result) {
-            commit('setSummonedEvent', result)
+            commit('initSummonedEvent', result)
         })
     }
 }
