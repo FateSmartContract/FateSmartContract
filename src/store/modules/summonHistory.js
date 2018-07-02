@@ -51,29 +51,13 @@ const mutations = {
 // actions
 const actions = {
     web3UpdateSummonEvent ({commit, state}) {
-        player.instance.SummonEvent({
-            playerAddress: window.web3.eth.accounts[0]
-        }, {
-            fromBlock: 0, toBlock: 'latest'
-        }).get(function (error, result) {
-            if (error) {
-                console.log(`Watch error: ${error}`)
-            } else {
-                commit('setSummonEvent', result)
-            }
+        player.getAllSummonEvent().then(function (result) {
+            commit('setSummonEvent', result)
         })
     },
     web3UpdateSummonedEvent ({commit, state}) {
-        player.instance.SummonedEvent({
-            playerAddress: window.web3.eth.accounts[0]
-        }, {
-            fromBlock: 0, toBlock: 'latest'
-        }).get(function (error, result) {
-            if (error) {
-                console.log(`Watch error: ${error}`)
-            } else {
-                commit('setSummonedEvent', result)
-            }
+        player.getAllSummonedEvent().then(function (result) {
+            commit('setSummonedEvent', result)
         })
     }
 }

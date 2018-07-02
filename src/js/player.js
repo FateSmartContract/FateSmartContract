@@ -142,6 +142,42 @@ const Player = {
                 reject(err)
             })
         })
+    },
+
+    getAllSummonEvent: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.SummonEvent({
+                playerAddress: window.web3.eth.accounts[0]
+            }, {
+                fromBlock: 0, toBlock: 'latest'
+            }).get(function (error, result) {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(result)
+                }
+            })
+        })
+    },
+
+    getAllSummonedEvent: function () {
+        let self = this
+
+        return new Promise((resolve, reject) => {
+            self.instance.SummonedEvent({
+                playerAddress: window.web3.eth.accounts[0]
+            }, {
+                fromBlock: 0, toBlock: 'latest'
+            }).get(function (error, result) {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(result)
+                }
+            })
+        })
     }
 }
 
