@@ -102,6 +102,7 @@ function registerEvent () {
         } else {
             store.commit('game/setSummoningHash', result.args.hash)
             store.commit('summonHistory/addSummonEvent', result)
+            store.dispatch('player/web3UpdateTokenQuartzAmount')
         }
     })
 
