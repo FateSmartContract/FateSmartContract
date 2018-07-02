@@ -18,7 +18,7 @@ build:
 
 test:
   stage: test
-  image: selenium/node-chrome
+  image: node:8
   cache: # Speed up builds
     key: $CI_COMMIT_REF_NAME
     paths:
