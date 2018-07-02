@@ -87,23 +87,25 @@
         methods: {
             summonOne: function () {
                 player.summonOne().then((result) => {
-                    this.showIndex = 0
-                    this.showCard = [false]
+                    this.initShowData(1)
                     this.$store.commit('game/beginSummoning', 1)
                 })
             },
             summonTen: function () {
                 player.summonTen().then((result) => {
-                    this.showIndex = 0
-                    this.showCard = []
-                    for (let i = 0; i < 10; i++) {
-                        this.showCard.push(false)
-                    }
+                    this.initShowData(10)
                     this.$store.commit('game/beginSummoning', 10)
                 })
             },
             closeSummoningPage: function () {
                 this.$store.commit('game/endSummoning')
+            },
+            initShowData: function (amount) {
+                this.showIndex = 0
+                this.showCard = []
+                for (let i = 0; i < amount; i++) {
+                    this.showCard.push(false)
+                }
             },
             canShowCard: function (index) {
                 return this.summonResult[index] === null || !this.showCard[index]
