@@ -16,18 +16,16 @@ build:
 
 test:
   stage: test
-  image: node:8
+  image: fatesmartcontract/gitlab-ci-truffle-test
   cache: # Speed up builds
     key: $CI_COMMIT_REF_NAME
     paths:
       - node_modules
   before_script:
-    - npm install -g ganache-cli
-    - npm install -g truffle
-    - yarn install
     - ganache-cli -p 7545 > /dev/null &
     - sleep 1s
   script:
+    - yarn install
     - truffle compile
     - truffle migrate --reset
     - yarn run test
