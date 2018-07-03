@@ -42,4 +42,31 @@ contract('[JS] Fate Smart Contract Data Structure', function (accounts) {
             assert.equal(priceInWei, web3.toWei('0.01', 'ether'))
         })
     })
+
+    // creator 是部屬合約的帳號
+    it('只有 creator 能設定價格與石頭數', function () {
+        let fateContractInstance
+
+        return fateContract.deployed().then(function (instance) {
+            fateContractInstance = instance
+        }).then(function () {
+            let errorFlag = false
+            return fateContractInstance.setTokenQuartzBuyAmount.sendTransaction(200, {from: accounts[1]})
+                .catch(function (error) {
+                    assert.equal(error.message, 'VM Exception while processing transaction: revert')
+                    errorFlag = true
+                }).then(function () {
+                    assert(errorFlag)
+                })
+        }).then(function () {
+            let errorFlag = false
+            return fateContractInstance.setTokenQuartzPriceInWei.sendTransaction(web3.toWei('0.01', 'ether'), {from: accounts[1]})
+                .catch(function (error) {
+                    assert.equal(error.message, 'VM Exception while processing transaction: revert')
+                    errorFlag = true
+                }).then(function () {
+                    assert(errorFlag)
+                })
+        })
+    })
 })
