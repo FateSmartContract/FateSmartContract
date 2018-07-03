@@ -12,7 +12,7 @@ module.exports = {
             .url(devServer)
             .waitForElementVisible('#app', 5000)
             .assert.elementPresent('.container')
-            .assert.containsText('h1', 'Fate/Smart Contract')
+            .assert.containsText('h1', 'Wrong Title')
             // .assert.elementCount('img', 1)
             .end()
     }
