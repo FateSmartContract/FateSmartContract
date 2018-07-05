@@ -32,7 +32,7 @@ contract FateSmartContractSummon is FateSmartContractDataStructure {
         return hash;
     }
 
-    function summonCallback(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType) external onlyCreator {
+    function summonCallback(uint256 hash, address playerAddress, uint256[] results, uint256[] cardType) external onlyDealer {
         require(responses[hash] == 1);
         require(results.length == cardType.length);
 

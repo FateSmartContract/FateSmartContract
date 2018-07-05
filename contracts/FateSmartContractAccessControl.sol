@@ -26,11 +26,26 @@ contract FateSmartContractAccessControl {
         return creator;
     }
 
+    function getPause() public view returns (bool) {
+        return pause;
+    }
+
     function setPause(bool _pause) public onlyCreator {
         pause = _pause;
     }
 
     function sendEthToCreator(uint256 _amountInWei) public onlyCreator {
         creator.transfer(_amountInWei);
+    }
+
+    mapping(address => bool) private dealers;
+
+    modifier onlyDealer() {
+        require(dealers[msg.sender]);
+        _;
+    }
+
+    function setDealer(address _address, bool value) public onlyCreator {
+        dealers[_address] = value;
     }
 }
