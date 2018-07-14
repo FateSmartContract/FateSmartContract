@@ -29,7 +29,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-2 col-card" v-for="i in summonAmount" style="position: relative;">
                             <div v-if="canShowCard(i - 1)">
-                                <img src="../../assets/card-back.png" class="img-fluid img-thumbnail ">
+                                <img src="@/assets/card-back.png" class="img-fluid img-thumbnail ">
                                 <span class="fa-center">
                                     <i class="fas fa-spinner fa-pulse fa-4x"></i>
                                 </span>

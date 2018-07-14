@@ -1,16 +1,21 @@
 <template>
     <div style="position: relative">
         <img v-holder="'img=256x256?auto=yes&theme=vue&size=24&text=' + id.toString().padStart(3, 0)" class="img-fluid img-thumbnail">
-        <img src="@/assets/SSR.png" class="img-fluid img-thumbnail overlay"/>
+        <img :src="getRarityImagePath()" class="img-fluid img-thumbnail overlay"/>
     </div>
 </template>
 
 <script>
+    import cardData from '@/js/cardData'
+
     export default {
         name: 'Card',
         props: [
             'id'
-        ]
+        ],
+        methods: {
+            getRarityImagePath: cardData.getRarityImagePath
+        }
     }
 </script>
 
