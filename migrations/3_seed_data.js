@@ -35,7 +35,7 @@ module.exports = function (deployer, network, accounts) {
             let logs = await new Promise(function (resolve, reject) {
                 summonEvent.get(function (error, logs) {
                     if (error) {
-                        throw error
+                        reject(error)
                     }
                     resolve(logs)
                 })
