@@ -9,6 +9,7 @@ module.exports = function (deployer, network, accounts) {
             return FateSmartContractSummon.deployed()
         }).then(async function (instance) {
             console.log('[Debug]', '使用 accounts[0] 設定 accounts[9] 可以回復抽卡結果')
+            await web3.personal.unlockAccount(accounts[0])
             await instance.setDealer(accounts[9], true, {
                 from: accounts[0]
             })
