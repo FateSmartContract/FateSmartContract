@@ -10,11 +10,15 @@ import store from './store'
 import App from './App'
 import player from '@/js/player'
 
+import Card from '@/components/Dashboard/ServantAndCraftEssence/Card.vue'
+
 Vue.use(VueHolder)
 
 let isInitWeb3 = false
 
 window.addEventListener('load', function () {
+    Vue.component('card', Card)
+
     /* eslint-disable no-new */
     new Vue({
         el: '#app',
