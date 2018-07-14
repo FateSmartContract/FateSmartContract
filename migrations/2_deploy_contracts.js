@@ -1,5 +1,5 @@
-var FateSmartContractSummon = artifacts.require("./FateSmartContractSummon.sol");
+var FateSmartContractSummon = artifacts.require('./FateSmartContractSummon.sol')
 
 module.exports = function (deployer) {
-    deployer.deploy(FateSmartContractSummon);
-};
+    deployer.deploy(FateSmartContractSummon)
+}
