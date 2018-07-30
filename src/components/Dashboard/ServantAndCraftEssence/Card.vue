@@ -1,7 +1,8 @@
 <template>
     <div style="position: relative">
-        <img v-holder="'img=256x256?auto=yes&theme=vue&size=24&text=' + id.toString().padStart(3, 0)" class="img-fluid img-thumbnail">
-        <img :src="getRarityImagePath()" class="img-fluid img-thumbnail overlay"/>
+        <img v-if="getCardImage === ''" v-holder="'img=256x256?auto=yes&theme=vue&size=24&text=' + id.toString().padStart(3, 0)" class="img-fluid img-thumbnail">
+        <img v-else :src="getCardImage" class="img-fluid img-thumbnail">
+        <img v-show="getRarityImage !== ''" :src="getRarityImage" class="img-fluid img-thumbnail overlay"/>
     </div>
 </template>
 
@@ -10,13 +11,25 @@
 
     export default {
         name: 'Card',
-        props: [
-            'id',
-            'type'
-        ],
-        methods: {
-            getRarityImagePath: cardData.getRarityImagePath
-        }
+        props: {
+            id: {
+                type: Number,
+                required: true
+            },
+            type: {
+                type: String,
+                required: true
+            }
+        },
+        computed: {
+            getCardImage: function () {
+                return cardData.getCardImage(this.id, this.type)
+            },
+            getRarityImage: function () {
+                return cardData.getRarityImage(this.id, this.type)
+            }
+        },
+        methods: {}
     }
 </script>
 

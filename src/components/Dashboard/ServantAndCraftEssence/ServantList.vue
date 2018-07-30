@@ -3,7 +3,7 @@
         <div v-if="servant !== null" class="container">
             <div class="row">
                 <div v-for="id in servant" class="col-sm-2 fgo-card">
-                    <card :id="id"></card>
+                    <card :id="id" type="servant"></card>
                 </div>
             </div>
         </div>

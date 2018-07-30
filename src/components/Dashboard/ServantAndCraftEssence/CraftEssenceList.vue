@@ -3,7 +3,7 @@
         <div v-if="craftEssence !== null" class="container">
             <div class="row">
                 <div v-for="id in craftEssence" class="col-sm-2 fgo-card">
-                    <card :id="id"></card>
+                    <card :id="id" type="craftEssence"></card>
                 </div>
             </div>
         </div>
