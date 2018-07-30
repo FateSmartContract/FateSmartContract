@@ -1,8 +1,9 @@
 const cardData = {
 
-    getRarityImagePath: function () {
+    getRarityImagePath: function (id, type) {
         return '/static/image/SSR.png'
     }
+
 }
 
 export default cardData

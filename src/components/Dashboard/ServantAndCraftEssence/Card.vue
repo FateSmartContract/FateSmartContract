@@ -6,12 +6,13 @@
 </template>
 
 <script>
-    import cardData from '@/js/cardData'
+    import cardData from '@/js/card-data'
 
     export default {
         name: 'Card',
         props: [
-            'id'
+            'id',
+            'type'
         ],
         methods: {
             getRarityImagePath: cardData.getRarityImagePath
