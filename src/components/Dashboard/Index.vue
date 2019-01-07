@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="container">
-            <router-link to="/" class="title"><h1>Fate/Smart Contract</h1></router-link>
             <span class="btn btn-outline-dark btn-lg float-right btn-outline-display"><i class="fas fa-cube"></i> {{ tokenQuartzAmount }}</span>
             <router-link class="btn btn-outline-dark btn-lg" active-class="active" to="/dashboard/servant-and-craft-essence">
                 <i class="fas fa-clipboard-list"></i> 靈基一覽

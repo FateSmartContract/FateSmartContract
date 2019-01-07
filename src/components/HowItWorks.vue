@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <router-link to="/" class="title"><h1>Fate/Smart Contract</h1></router-link>
         <h1>How it Works</h1>
         <!-- TODO: -->
     </div>
