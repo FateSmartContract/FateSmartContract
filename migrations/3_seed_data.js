@@ -24,7 +24,7 @@ module.exports = function (deployer, network, accounts) {
             console.log('[Debug]', '使用 accounts[3] 購買 1 單，再進行 10 抽')
             await buyOneAndSummon(instance, accounts[3], 1)
 
-            console.log('[Debug]', '使用 accounts[9] 回復 accounts[3] 抽卡結果，但是故意回復所有卡片')
+            console.log('[Debug]', '使用 accounts[9] 回覆 accounts[3] 抽卡結果，但是故意回覆所有卡片')
             let summonEvent = instance.SummonEvent({
                 playerAddress: accounts[3]
             }, {
